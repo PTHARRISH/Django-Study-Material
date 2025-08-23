@@ -23,16 +23,16 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     # product = ProductSerializer()
-    product_name = serializers.CharField(source="Product.name")
+    product_name = serializers.CharField(source="product.name")
+    product_price = serializers.DecimalField(
+        max_digits=10, decimal_places=2, source="product.price"
+    )
     # without this it will display id but once you pass the product serializer
     # it will get the id relevent information will display
 
     class Meta:
         model = OrderItem
-        fields = (
-            "product_name",
-            "quantity",
-        )
+        fields = ("product_name", "product_price", "quantity", "item_subtotal")
 
 
 class OrderSerializer(serializers.ModelSerializer):

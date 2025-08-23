@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from app.models import Product
-from app.serializers import ProductSerializer
+from app.models import Product,Order,OrderItem
+from app.serializers import ProductSerializer,OrderItemSerializer,OrderSerializer
 
 # from django.http import JsonResponse
 
@@ -33,4 +33,11 @@ def product_detail(request, pk):
 
     # Step 3: serializer.data converts the product object to dictionary
     # Example output: {'id': 1, 'name': 'iPhone', 'price': 999.99}
+    return Response(serializer.data)
+
+
+@api_view(["GET"])
+def order_list(request):
+    orders=Order.objects.all()
+    serializer=OrderSerializer(orders,many=True)
     return Response(serializer.data)
