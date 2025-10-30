@@ -26,3 +26,12 @@ ENV/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Environment files (files, not just a folder)
+.env
+.env.*
+*.env
+!.env.example
+
+# Ruff cache
+.ruff_cache/
